@@ -1,19 +1,18 @@
 <script>
-	import Greetings from './components/greetings.svelte';
-
-	export let name;
-
-	let age = 22;
-
-	const incrementAge = () => {
-		age += 1;
-	}
+	import {Router, Route, Link} from 'svelte-navigator';
+	import Home from './pages/index.svelte';
+	import Test from './pages/test.svelte'
 </script>
 
-<main>
-	<h1>Hello {name}, my age is {age}</h1>
-	<button on:click={incrementAge}>Increment age</button>
-	<hr>
-	Greetings html: <br />
-	<Greetings name={name}>You're welcome!</Greetings>
-</main>
+<Router>
+	<nav>
+		<Link to='/'>Home</Link>
+		<Link to='/test'>Test</Link>
+	</nav>
+
+	<main>
+		<Route path='/'><Home /></Route>
+		<Route path='/test'><Test /></Route>
+	</main>
+</Router>
+
