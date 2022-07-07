@@ -3,6 +3,4 @@
 
 </script>
 
-<main>
-    Hello world
-</main>
+<h1>Test page</h1>
