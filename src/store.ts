@@ -1,11 +1,33 @@
-import { writable } from "svelte/store";
+import './patchProcess';
+import { createStore } from 'redux';
 
-export const count = writable(0);
-
-export function increment() {
-  count.update(state => state + 1);
+function reducer (state = 0, action) {
+  switch (action.type) {
+    case 'INCREMENT':
+      return state + 1
+    case 'DECREMENT':
+      return state - 1
+    default:
+      return state
+  }
 }
 
-export function decrement() {
-  count.update(state => state - 1);
+function svelteStoreEnhancer(createStoreApi) {
+	return function (reducer, initialState) {
+		const reduxStore = createStoreApi(
+			reducer, initialState
+		);
+		return {
+			...reduxStore,
+			subscribe(fn) {
+				fn(reduxStore.getState());
+
+				return reduxStore.subscribe(() => {
+					fn(reduxStore.getState());
+				});
+			}
+		}
+	}
 }
+
+export default createStore(reducer, svelteStoreEnhancer);

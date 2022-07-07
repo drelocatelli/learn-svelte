@@ -1,11 +1,13 @@
 <script>
-    import {count, increment, decrement} from '../store.ts';
+    import store from '../store.ts';
     export let name;
 
-    let countValue;
-    count.subscribe(value => {
-        countValue = value;
-    });
+    function decrement() {
+		store.dispatch({ type:'DECREMENT' });
+	}
+	function increment() {
+		store.dispatch({ type:'INCREMENT' });
+	}
 
 </script>
 
@@ -14,7 +16,7 @@
     <br><br>
     Count: <br>
     <button on:click={decrement}>-</button> 
-    {countValue}
+    {store}
     <button on:click={increment}>+</button> 
 
 </div>
