@@ -1,4 +1,4 @@
-import './patchProcess';
+import './patchProcess.js';
 import { createStore } from 'redux';
 
 function reducer (state = 0, action) {

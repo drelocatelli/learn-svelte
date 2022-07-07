@@ -16,7 +16,7 @@
     <br><br>
     Count: <br>
     <button on:click={decrement}>-</button> 
-    {store}
+    {$store}
     <button on:click={increment}>+</button> 
 
 </div>
